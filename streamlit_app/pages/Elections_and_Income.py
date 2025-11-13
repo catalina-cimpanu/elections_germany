@@ -3,6 +3,8 @@ import pandas as pd
 import plotly.express as px
 import json
 
+st.set_page_config(page_title="Election Results in Germany and Income", layout="wide")
+
 @st.cache_data
 def load_data(path, dtype):
     df = pd.read_csv(path, dtype=dtype)
@@ -104,7 +106,8 @@ def generate_maps(year):
         temp_year = 0
 
     if temp_year == 0:
-        st.write(f"We don't have data for income_year +/- 3 years.")
+        st.write(f"We don't have income data for {year} +/- 3 years.")
+        income_fig = None
     else:
         income_fig = px.choropleth_map(
             sorted_incomes[sorted_incomes["year"]==temp_year],
@@ -127,7 +130,7 @@ def generate_maps(year):
         )
     return [elections_winner_fig, income_fig,left_fig, right_fig]
 
-year = st.selectbox("Select the election year: ", election_years)
+year = st.selectbox("Select the election year: ", election_years[::-1])
 if year in income_years:
     temp_year = year
 elif year-1 in income_years:
@@ -152,20 +155,25 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader(f"Election Results for {year} (per district)")
-    if figs[0] == None:
-        st.write(f"We don't have data for the year{year}")        
+    st.plotly_chart(figs[0])
+
+with col2:
+    st.subheader(f"Income in Thousands of Euros in {year} {"(estimated from marks)" if temp_year<2000 else ""}")
+    if figs[1] == None:
+        st.write(f"We don't have income data for the year {year}")        
     else:
-        st.plotly_chart(figs[0])
+        st.plotly_chart(figs[1])
 
 
+st.subheader("Click these if you want to see more")
+col3, col4 = st.columns(2)
+
+with col3:
     if st.checkbox(f"Show Extreme Left-Leaning Votes for {year}"):
         # st.subheader("Extreme Left-Leaning Votes")
         st.plotly_chart(figs[2])
 
-with col2:
-    st.subheader(f"Income in Thousands of Euros in {temp_year} {"(estimated from marks)" if temp_year<2000 else ""}")
-    st.plotly_chart(figs[1])
-
+with col4:
     if st.checkbox(f"Show Extreme Right-Leaning Votes for {year}"):
         # st.subheader("Extreme Right-Leaning Votes")
         st.plotly_chart(figs[3])
