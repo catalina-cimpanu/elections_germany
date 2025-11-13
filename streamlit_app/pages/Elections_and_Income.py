@@ -10,8 +10,8 @@ def load_data(path, dtype):
     df = pd.read_csv(path, dtype=dtype)
     return df
 
-sorted_elects = load_data(path="../../data/sorted_elects.csv", dtype={"state_code": str, "county": str})
-sorted_incomes = load_data(path="../../data/sorted_incomes.csv", dtype={"state_code": str, "code": str})
+sorted_elects = load_data(path="../data/sorted_elects.csv", dtype={"state_code": str, "county": str})
+sorted_incomes = load_data(path="../data/sorted_incomes.csv", dtype={"state_code": str, "code": str})
 geojson = json.load(open("../data/georef-germany-kreis.geojson"))
 
 st.title("Election results and income in Germany")
