@@ -15,6 +15,9 @@ sorted_incomes = load_data(path="data/sorted_incomes.csv", dtype={"state_code": 
 geojson = json.load(open("data/georef-germany-kreis.geojson"))
 
 st.title("Election Results in Germany and Income")
+st.markdown("""
+            *⚠️ **Cave** The dataset doesn't mention which parties are considered extreme right and extreme left, these results might vary according to this definition.*
+            """)
 
 election_years = sorted_elects["election_year"].unique()
 income_years = sorted_incomes["year"].unique()
