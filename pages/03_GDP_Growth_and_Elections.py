@@ -17,10 +17,10 @@ def load_data(path):
     df = pd.read_csv(path, index_col=0)
     return df
 
-gdp_votes_raw = load_data(path = "gdp_votes.csv")
+gdp_votes_raw = load_data(path = "data/gdp_votes.csv")
 gdp_votes = deepcopy(gdp_votes_raw)
 
-gdp_growth = load_data(path = "deu_gdp.csv")
+gdp_growth = load_data(path = "data/deu_gdp.csv")
 deu_gdp = deepcopy(gdp_growth)
 
 st.title("Analysis of GDP Growth (%) and Vote Share in Germany")
