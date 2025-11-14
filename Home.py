@@ -40,4 +40,4 @@ st.markdown("""
             ##### Information about the German political parties
             """)
 
-st.page_link("pages/06_Information_about_the_parties.py", label="Click here to see information about the German political parties")
+st.page_link("pages/07_Information_about_the_parties.py", label="Click here to see information about the German political parties")
