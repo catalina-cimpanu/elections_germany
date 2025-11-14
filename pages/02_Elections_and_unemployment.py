@@ -321,10 +321,10 @@ with col_text:
         - In a general down trend.<br>
         - Strongly punished during recessions when they are in government.<br>
         - Gain when CDU/CSU is blamed for crisis periods (2021).<br>
+
         ### <span style="font-size:16px;"><b>Greens</b></span>
-        - Less directly tied to GDP cycles.<br>
+        - Negatively tied to GDP cycles.<br>
         - Grow during periods of social optimism and environmental focus.<br>
-        - Decline during economic fear or high inflation (2022–2024).<br>
 
         ### <span style="font-size:16px;"><b>FDP</b></span>
         - Gain during crises as a protest vote (especially 2008, 2009).<br>
