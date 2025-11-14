@@ -10,9 +10,9 @@ def load_data(path, dtype):
     df = pd.read_csv(path, dtype=dtype)
     return df
 
-sorted_elects = load_data(path="../data/sorted_elects.csv", dtype={"state_code": str, "county": str})
-sorted_incomes = load_data(path="../data/sorted_incomes.csv", dtype={"state_code": str, "code": str})
-geojson = json.load(open("../data/georef-germany-kreis.geojson"))
+sorted_elects = load_data(path="data/sorted_elects.csv", dtype={"state_code": str, "county": str})
+sorted_incomes = load_data(path="data/sorted_incomes.csv", dtype={"state_code": str, "code": str})
+geojson = json.load(open("data/georef-germany-kreis.geojson"))
 
 st.title("Election results and income in Germany")
 
@@ -158,7 +158,7 @@ with col1:
     st.plotly_chart(figs[0])
 
 with col2:
-    st.subheader(f"Income in Thousands of Euros in {year} {"(estimated from marks)" if temp_year<2000 else ""}")
+    st.subheader(f"Income in Thousands of Euros in {year} {"(estimated from marks)" if (temp_year<2000 and temp_year!=0 )else ""}")
     if figs[1] == None:
         st.write(f"We don't have income data for the year {year}")        
     else:
