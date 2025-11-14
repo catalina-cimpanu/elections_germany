@@ -14,19 +14,10 @@ sorted_elects = load_data(path="data/sorted_elects.csv", dtype={"state_code": st
 sorted_incomes = load_data(path="data/sorted_incomes.csv", dtype={"state_code": str, "code": str})
 geojson = json.load(open("data/georef-germany-kreis.geojson"))
 
-st.title("Election results and income in Germany")
+st.title("Election Results in Germany and Income")
 
 election_years = sorted_elects["election_year"].unique()
 income_years = sorted_incomes["year"].unique()
-
-legend_names = {
-    "cdu": "CDU/CSU",
-    "spd": "SPD",
-    "gruene": "Greens",
-    "fdp": "FDP",
-    "afd": "AfD",
-    "linke_pds": "Linke/PDS",
-}
 
 @st.cache_resource
 def generate_maps(year):
@@ -174,15 +165,13 @@ with col2:
         st.plotly_chart(figs[1])
 
 
-st.subheader("Click these if you want to see more")
+st.markdown("###### Click here if you want to see the extreme leaning votes")
 col3, col4 = st.columns(2)
 
 with col3:
     if st.checkbox(f"Show Extreme Left-Leaning Votes for {year}"):
-        # st.subheader("Extreme Left-Leaning Votes")
         st.plotly_chart(figs[2])
 
 with col4:
     if st.checkbox(f"Show Extreme Right-Leaning Votes for {year}"):
-        # st.subheader("Extreme Right-Leaning Votes")
         st.plotly_chart(figs[3])
