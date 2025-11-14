@@ -15,6 +15,9 @@ from copy import deepcopy
 st.set_page_config(page_title="Germany Elections & Economy", layout="wide")
 st.title("Germany: GDP, Unemployment and Federal Election Results")
 
+st.write("- The dashed frames in the plot refers to goverment period.\n")
+st.write("- The colors in the dashed boxes represents the ruling parties. Multiple colors mean a coalation\n")
+
 # ─────────────────────────────────────────────
 #  LOAD DATA
 # ─────────────────────────────────────────────
@@ -127,12 +130,12 @@ legend_names = {
 }
 
 party_colors = {
-    "cdu_csu": "#003B6F",
-    "spd_total": "#A6006B",
-    "gruene_total": "#1AA037",
-    "fdp_total": "#FFEF00",
-    "afd_total": "#0489DB",
-    "linke_pds_total": "#E3000F",
+    "cdu_csu": "black",
+    "spd_total": "red",
+    "gruene_total": "green",
+    "fdp_total": "yellow",
+    "afd_total": "blue",
+    "linke_pds_total": "purple",
 }
 
 governments = [
@@ -169,6 +172,7 @@ events = {
     2022: "2022, Russian-Ukrainian war",
 }
 
+
 # ─────────────────────────────────────────────
 #  FIGURE 1: GDP + PARTY VOTE SHARES
 # ─────────────────────────────────────────────
@@ -196,6 +200,7 @@ for party in party_cols_for_plot:
             mode="lines+markers",
             name=legend_names.get(party, party),
             line=dict(color=party_colors.get(party, "gray")),
+            marker=dict(size=16),
             yaxis="y2",
             hovertemplate="<b>%{fullData.name}</b><br>Year: %{x}<br>Vote Share: %{y:.2f}%<extra></extra>",
         )
@@ -218,8 +223,8 @@ for g in governments:
         fig.add_vrect(
             x0=x0,
             x1=x1,
-            fillcolor=party_colors.get(party, "lightgray"),
-            opacity=0.12,
+            fillcolor=party_colors.get(party),
+            opacity=0.62,
             layer="below",
             line_width=0,
         )
@@ -229,8 +234,9 @@ for g in governments:
         x0=start,
         x1=end,
         fillcolor="rgba(0,0,0,0)",
-        line_width=1.5,
-        line_color="rgba(0,0,0,0.35)",
+        line_width=4.5,
+        line_dash="dash",
+        line_color="rgba(120,120,120,0.95)",
         layer="below",
     )
 
@@ -250,22 +256,12 @@ for g in governments:
 
 # Events
 for year, text in events.items():
-    fig.add_trace(
-        go.Scatter(
-            x=[year, year],
-            y=[ymin, ymax * 1.1],
-            mode="lines",
-            line=dict(color="gray", width=1),
-            showlegend=False,
-        )
-    )
-
     fig.add_annotation(
         x=year,
         y=ymin,
         text=f"<b>{text}</b>",
         textangle=-90,
-        font=dict(size=12, color="gray"),
+        font=dict(size=12, color="white"),
         showarrow=False,
         xanchor="center",
         yanchor="bottom",
@@ -273,7 +269,6 @@ for year, text in events.items():
 
 # Layout
 fig.update_layout(
-    title="GDP Growth (%) and Party Vote Shares with Governments",
     xaxis=dict(title="Election Year"),
     yaxis=dict(  # LEFT AXIS (GDP)
         title="GDP Growth (%)",
@@ -299,8 +294,54 @@ fig.update_layout(
 )
 
 # STREAMLIT OUTPUT FOR FIGURE 1
-st.subheader("GDP Growth (%) and Party Vote Shares with Governments")
-st.plotly_chart(fig, use_container_width=True)
+st.subheader("GDP Growth (%) and Party Vote Shares")
+
+#with st.expander("📊 Political Party Vote Patterns Explained"):
+col_text, col_plot = st.columns([1, 2])
+
+with col_text:
+    st.markdown(
+        """
+        <div style="font-size:14px; line-height:1.3;">
+
+        ### <span style="font-size:16px;"><b>CDU/CSU</b></span>
+        - In a general down trend.<br>
+        - Gain or stabilize during good GDP years.<br>
+        - Lose when they lead during major crises (2008–2009, 2020).<br>
+
+        ### <span style="font-size:16px;"><b>SPD</b></span>
+        - In a general down trend.<br>
+        - Strongly punished during recessions when they are in government.<br>
+        - Gain when CDU/CSU is blamed for crisis periods (2021).<br>
+        ### <span style="font-size:16px;"><b>Greens</b></span>
+        - Less directly tied to GDP cycles.<br>
+        - Grow during periods of social optimism and environmental focus.<br>
+        - Decline during economic fear or high inflation (2022–2024).<br>
+
+        ### <span style="font-size:16px;"><b>FDP</b></span>
+        - Gain during crises as a protest vote (especially 2008, 2009).<br>
+        - Votes drop every time when they are in the ruling coalition.<br>
+
+        ### <span style="font-size:16px;"><b>AfD</b></span>
+        - Rise during migration crises and the inflation/energy crisis.<br>
+        - Their trend correlates more with societal stress and uncertainty than pure GDP performance.<br>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col_plot:
+        st.plotly_chart(fig, use_container_width=True)
+
+st.markdown(
+    """
+    <div style="text-align:center; font-weight:bold; font-size:18px;"> 
+        Every time GDP growth drops below 0, the ruling parties’ votes decline compared to the last election (one outlier: SPD in 2022).<br><br><br><br>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # ─────────────────────────────────────────────
 #  FIGURE 2: UNEMPLOYMENT + PARTY VOTE SHARES
@@ -329,6 +370,7 @@ for party in party_cols_for_plot:
             mode="lines+markers",
             name=legend_names.get(party, party),
             line=dict(color=party_colors.get(party, "gray")),
+            marker=dict(size=16),
             yaxis="y2",
             hovertemplate="<b>%{fullData.name}</b><br>Year: %{x}<br>Vote Share: %{y:.2f}%<extra></extra>",
         )
@@ -351,8 +393,8 @@ for g in governments:
         fig.add_vrect(
             x0=x0,
             x1=x1,
-            fillcolor=party_colors.get(party, "lightgray"),
-            opacity=0.12,
+            fillcolor=party_colors.get(party),
+            opacity=0.62,
             layer="below",
             line_width=0,
         )
@@ -362,8 +404,9 @@ for g in governments:
         x0=start,
         x1=end,
         fillcolor="rgba(0,0,0,0)",
-        line_width=1.5,
-        line_color="rgba(0,0,0,0.35)",
+        line_width=4.5,
+        line_dash="dash",
+        line_color="rgba(120,120,120,0.95)",
         layer="below",
     )
 
@@ -383,22 +426,12 @@ for g in governments:
 
 # Events
 for year, text in events.items():
-    fig.add_trace(
-        go.Scatter(
-            x=[year, year],
-            y=[ymin, ymax * 1.1],
-            mode="lines",
-            line=dict(color="gray", width=1),
-            showlegend=False,
-        )
-    )
-
     fig.add_annotation(
         x=year,
         y=ymin,
         text=f"<b>{text}</b>",
         textangle=-90,
-        font=dict(size=12, color="gray"),
+        font=dict(size=12, color="white"),
         showarrow=False,
         xanchor="center",
         yanchor="bottom",
@@ -406,7 +439,6 @@ for year, text in events.items():
 
 # Layout
 fig.update_layout(
-    title="Unemployment (%) and Party Vote Shares with Governments",
     xaxis=dict(title="Election Year"),
     yaxis=dict(  # LEFT AXIS (Unemployment)
         title="Unemployment (%)",
@@ -432,5 +464,65 @@ fig.update_layout(
 )
 
 # STREAMLIT OUTPUT FOR FIGURE 2
-st.subheader("Unemployment (%) and Party Vote Shares with Governments")
-st.plotly_chart(fig, use_container_width=True)
+st.subheader("Unemployment (%) and Party Vote Shares")
+
+#with st.expander("📉 Political Party Vote Patterns Linked to Unemployment"):
+col_text, col_plot = st.columns([1, 2])
+
+with col_text:
+    st.markdown(
+        """
+        <div style="font-size:14px; line-height:1.3;">
+
+        ### <span style="font-size:16px;"><b>CDU/CSU</b></span>
+        - Lose support when unemployment is high (early 1990s, mid-2000s, COVID 2020).<br>
+        - Voters reward them during stable job markets.<br>
+
+        ### <span style="font-size:16px;"><b>SPD</b></span>
+        - Their vote share is strongly tied to labor market performance.<br>
+        - Slowly recover during periods of low unemployment.<br>
+
+        ### <span style="font-size:16px;"><b>Greens</b></span>
+        - Weak correlation with unemployment trends.<br>
+        - Decline slightly during economic fear scenarios.<br>
+
+        ### <span style="font-size:16px;"><b>FDP</b></span>
+        - Weak correlation with unemployment trends.<br>
+        - Collapse when unemployment improves and urgency fades.<br>
+
+        ### <span style="font-size:16px;"><b>AfD</b></span>
+        - Rise more with economic anxiety than with unemployment numbers themselves.<br>
+        - Only loosely tied to actual unemployment levels.<br>
+
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col_plot:
+        st.plotly_chart(fig, use_container_width=True)
+
+st.markdown(
+    """
+    <div style="text-align:center; font-weight:bold; font-size:18px;"> <br>
+        After reunification, the collapse of East German industries and the massive costs of reconstruction led to high unemployment, especially in the eastern states.
+    <br></div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown(
+    """
+    <div style="text-align:center; font-weight:bold; font-size:18px;"> <br>
+        The dot-com bubble burst and the global slowdown after 2001 pushed Germany into weak growth and rising unemployment. 
+        The Hartz reforms (2003–2005) also temporarily increased unemployment statistics by making hidden unemployment visible.
+    </div><br><br>
+
+    <div style="text-align:left; font-size:16px; font-weight:bold; margin-top:10px;">
+        <a href="https://en.wikipedia.org/wiki/List_of_Federal_Republic_of_Germany_governments" target="_blank">➡️ List of German federal governments</a><br>
+        <a href="https://en.wikipedia.org/wiki/Hartz_concept" target="_blank">➡️ More about the Hartz reforms</a><br>
+        <a href="https://en.wikipedia.org/wiki/German_reunification" target="_blank">➡️ German reunification</a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
