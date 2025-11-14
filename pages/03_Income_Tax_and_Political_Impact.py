@@ -291,12 +291,12 @@ st.dataframe(analysis_df.head())
 st.subheader("Tax per Taxpayer vs Party Vote Share (2021)")
 
 party_colors = {
-    "cdu_csu": "#000000",
-    "spd": "#E3000F",
-    "gruene": "#1FA12E",
-    "fdp": "#FFED00",
-    "linke_pds": "#800000",
-    "afd": "#00B2FF",
+    "cdu_csu": "#003B6F",
+    "spd": "#A6006B",
+    "gruene": "#1AA037",
+    "fdp": "#FFEF00",
+    "linke_pds": "#E3000F",
+    "afd": "#0489DB",
 }
 
 # Dropdown to choose the party to visualize
