@@ -190,24 +190,18 @@ corr_lag2 = {'cdu_csu': 0.7385220348384772,
  'spd_total': 0.07134373387810822,
  'gruene_total': -0.7224423723462742,
  'fdp_total': -0.06053097583137555,
- 'afd_total': -0.33560639299721756,
- 'linke_pds_total': -0.05243341525474488}
+ 'linke_pds_total': -0.05243341525474488,
+ 'afd_total': -0.33560639299721756}
 
 parties = list(corr_lag2.keys())
 values = list(corr_lag2.values())
+colors = [party_colors[p] for p in parties]
 
 corr_fig = go.Figure(go.Bar(
     x=values,
     y=parties,
     orientation='h',
-    marker_color=[
-        "#1A1A1A",   # CDU/CSU - black
-        "#E3000F",   # SPD - red/purple
-        "#1AA037",   # Greens - green
-        "#FFEF00",   # FDP - yellow
-        "#0489DB",   # AfD - blue
-        "#B500CD"    # Linke - purple
-    ],
+    marker_color=colors,
     opacity=0.85,
 ))
 
@@ -242,10 +236,4 @@ with st.expander("Show interpretation of the plot"):
    **AfD** enters the party system in the 2010s and gains support in the periods following major crises (migration crisis, COVID-19, energy/inflation shock).
                  Its rise is most pronounced when economic or socio-political uncertainty is high. **Die Linke**, by contrast, peaks around the late 2000s and then steadily declines.
 
-    **Overall pattern**  
-    Taken together, the figure illustrates three key dynamics:  
-    1. A **long-term erosion of the traditional Volksparteien** (CDU/CSU and SPD).  
-    2. A **structural rise of issue and niche parties** such as the Greens and, for a time, Die Linke.  
-    3. The **emergence of AfD as a major protest party**, with gains concentrated in or after periods of crisis rather than during “normal” growth years.
-    4. CDU/CSU (0.74) show a moderate positive correlation, potentially meaning their vote share tends to increase in election years that follow stronger economic conditions. Greens (–0.72) show a moderate negative correlation, indicating their vote share tends to increase in periods following weaker economic performance. And, AfD (–0.34) has a weak-to-moderate negative correlation, meaning their vote gains slightly coincide with periods of weaker economic conditions.
 """)
