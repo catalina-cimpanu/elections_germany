@@ -130,7 +130,7 @@ party_colors = {
     "cdu_csu": "black",
     "spd_total": "red",
     "gruene_total": "green",
-    "fdp_total": "gold",
+    "fdp_total": "yellow",
     "afd_total": "blue",
     "linke_pds_total": "purple",
 }
@@ -196,6 +196,7 @@ for party in party_cols_for_plot:
             mode="lines+markers",
             name=legend_names.get(party, party),
             line=dict(color=party_colors.get(party, "gray")),
+            marker=dict(size=16),
             yaxis="y2",
             hovertemplate="<b>%{fullData.name}</b><br>Year: %{x}<br>Vote Share: %{y:.2f}%<extra></extra>",
         )
@@ -218,8 +219,8 @@ for g in governments:
         fig.add_vrect(
             x0=x0,
             x1=x1,
-            fillcolor=party_colors.get(party, "lightgray"),
-            opacity=0.12,
+            fillcolor=party_colors.get(party),
+            opacity=0.62,
             layer="below",
             line_width=0,
         )
@@ -229,8 +230,9 @@ for g in governments:
         x0=start,
         x1=end,
         fillcolor="rgba(0,0,0,0)",
-        line_width=1.5,
-        line_color="rgba(0,0,0,0.35)",
+        line_width=4.5,
+        line_dash="dash",
+        line_color="rgba(120,120,120,0.95)",
         layer="below",
     )
 
@@ -250,22 +252,22 @@ for g in governments:
 
 # Events
 for year, text in events.items():
-    fig.add_trace(
-        go.Scatter(
-            x=[year, year],
-            y=[ymin, ymax * 1.1],
-            mode="lines",
-            line=dict(color="gray", width=1),
-            showlegend=False,
-        )
-    )
+    # fig.add_trace(
+    #     go.Scatter(
+    #         x=[year, year],
+    #         y=[ymin, ymax * 1.1],
+    #         mode="lines",
+    #         line=dict(color="white", width=1),
+    #         showlegend=False,
+    #     )
+    # )
 
     fig.add_annotation(
         x=year,
         y=ymin,
         text=f"<b>{text}</b>",
         textangle=-90,
-        font=dict(size=12, color="gray"),
+        font=dict(size=12, color="white"),
         showarrow=False,
         xanchor="center",
         yanchor="bottom",
@@ -329,6 +331,7 @@ for party in party_cols_for_plot:
             mode="lines+markers",
             name=legend_names.get(party, party),
             line=dict(color=party_colors.get(party, "gray")),
+            marker=dict(size=16),
             yaxis="y2",
             hovertemplate="<b>%{fullData.name}</b><br>Year: %{x}<br>Vote Share: %{y:.2f}%<extra></extra>",
         )
@@ -351,8 +354,8 @@ for g in governments:
         fig.add_vrect(
             x0=x0,
             x1=x1,
-            fillcolor=party_colors.get(party, "lightgray"),
-            opacity=0.12,
+            fillcolor=party_colors.get(party),
+            opacity=0.62,
             layer="below",
             line_width=0,
         )
@@ -362,8 +365,9 @@ for g in governments:
         x0=start,
         x1=end,
         fillcolor="rgba(0,0,0,0)",
-        line_width=1.5,
-        line_color="rgba(0,0,0,0.35)",
+        line_width=4.5,
+        line_dash="dash",
+        line_color="rgba(120,120,120,0.95)",
         layer="below",
     )
 
@@ -383,22 +387,22 @@ for g in governments:
 
 # Events
 for year, text in events.items():
-    fig.add_trace(
-        go.Scatter(
-            x=[year, year],
-            y=[ymin, ymax * 1.1],
-            mode="lines",
-            line=dict(color="gray", width=1),
-            showlegend=False,
-        )
-    )
+    # fig.add_trace(
+    #     go.Scatter(
+    #         x=[year, year],
+    #         y=[ymin, ymax * 1.1],
+    #         mode="lines",
+    #         line=dict(color="white", width=1),
+    #         showlegend=False,
+    #     )
+    # )
 
     fig.add_annotation(
         x=year,
         y=ymin,
         text=f"<b>{text}</b>",
         textangle=-90,
-        font=dict(size=12, color="gray"),
+        font=dict(size=12, color="white"),
         showarrow=False,
         xanchor="center",
         yanchor="bottom",
