@@ -11,7 +11,7 @@ st.markdown("""
 
 st.markdown("""
             ##### Income and Election Results
-            *⚠️ **Cave** The dataset doesn't mention which parties are considered extreme right and extreme left, these results might vary accpording to this definition.*
+            *⚠️ **Cave** The dataset doesn't mention which parties are considered extreme right and extreme left, these results might vary according to this definition.*
             - The regions with lower income have a tendency to vote more extreme, with left leaning votes up to 2013, and with clear shift towards the right starting 2017
             - AfD gained popularity starting 2017, with massive territory gain in 2025
             - CSU has been very stable over the years in south-east Germany
