@@ -10,13 +10,14 @@ st.markdown("""
             """) 
 
 st.markdown("""
-            ##### Interpretation of GDP and Party Vote-Share Trends
+            ##### Interpretation of GDP, Unemployment and Party Vote-Share Trends
             **Overall pattern**  
             Taken together, the figure illustrates three key dynamics:  
             1. A **long-term erosion of the traditional Volksparteien** (CDU/CSU and SPD).  
             2. A **structural rise of issue and niche parties** such as the Greens and, for a time, Die Linke.  
             3. The **emergence of AfD as a major protest party**, with gains concentrated in or after periods of crisis rather than during “normal” growth years.
-            4. CDU/CSU (0.74) show a moderate positive correlation, potentially meaning their vote share tends to increase in election years that follow stronger economic conditions. Greens (–0.72) show a moderate negative correlation, indicating their vote share tends to increase in periods following weaker economic performance. And, AfD (–0.34) has a weak-to-moderate negative correlation, meaning their vote gains slightly coincide with periods of weaker economic conditions.
+            
+            - CDU/CSU (0.74) show a moderate positive correlation, potentially meaning their vote share tends to increase in election years that follow stronger economic conditions. Greens (–0.72) show a moderate negative correlation, indicating their vote share tends to increase in periods following weaker economic performance. And, AfD (–0.34) has a weak-to-moderate negative correlation, meaning their vote gains slightly coincide with periods of weaker economic conditions.
 
             
             If you want to see the graphs:
