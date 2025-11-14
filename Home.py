@@ -22,6 +22,7 @@ st.markdown("""
             
             If you want to see the graphs:
 """)
+
 st.page_link("pages/03_GDP_Growth_and_Elections.py", label="Click here")
 
 st.markdown("""

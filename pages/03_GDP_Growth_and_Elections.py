@@ -85,11 +85,13 @@ else:
 
 
 trends_fig = go.Figure()
+deu_gdp['election_year'] = deu_gdp.index.astype(int)
+df_gdp = deu_gdp[deu_gdp['election_year'] >= 1990]
 
 trends_fig.add_trace(
     go.Bar(
-        x=reduced_df['election_year'],
-        y=reduced_df['gdp_growth'],
+        x=df_gdp['election_year'],
+        y=df_gdp['gdp_growth'],
         name="GDP Growth (%)",
         marker_color='lightblue',
         opacity=0.6,
@@ -203,6 +205,9 @@ corr_fig = go.Figure(go.Bar(
     orientation='h',
     marker_color=colors,
     opacity=0.85,
+    hovertemplate=
+    "<b>%{y}</b><br>" +   
+    "Correlation: %{x:.3f}<extra></extra>" 
 ))
 
 corr_fig.update_layout(
