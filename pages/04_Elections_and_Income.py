@@ -19,6 +19,15 @@ st.title("Election results and income in Germany")
 election_years = sorted_elects["election_year"].unique()
 income_years = sorted_incomes["year"].unique()
 
+legend_names = {
+    "cdu": "CDU/CSU",
+    "spd": "SPD",
+    "gruene": "Greens",
+    "fdp": "FDP",
+    "afd": "AfD",
+    "linke_pds": "Linke/PDS",
+}
+
 @st.cache_resource
 def generate_maps(year):
     elections_winner_fig = px.choropleth_map(
