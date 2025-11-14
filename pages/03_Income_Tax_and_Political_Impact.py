@@ -199,12 +199,12 @@ st.subheader("Total Votes by Party (Bundestag 2021)")
 voting_df, vote_count_col, party_cols = load_voting_data(2021)
 
 party_info = {
-    "cdu_csu": ("CDU/CSU", "#000000"),      # black
-    "spd": ("SPD", "#E3000F"),             # red
-    "gruene": ("Greens", "#1FA12E"),       # green
-    "fdp": ("FDP", "#FFED00"),             # yellow
-    "linke_pds": ("Die Linke", "#800000"), # maroon
-    "afd": ("AfD", "#00B2FF"),             # light blue
+    "cdu_csu": ("CDU/CSU", "#003B6F"),      # black
+    "spd": ("SPD", "#A6006B"),             # red
+    "gruene": ("Greens", "#1AA037"),       # green
+    "fdp": ("FDP", "#FFEF00"),             # yellow
+    "linke_pds": ("Die Linke", "#E3000F"), # maroon
+    "afd": ("AfD", "#0489DB"),             # light blue
 }
 
 # Compute total votes per party: sum(share * valid_votes)
